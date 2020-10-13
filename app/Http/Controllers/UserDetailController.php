@@ -28,7 +28,8 @@ class UserDetailController extends Controller
      */
     public function create()
     {
-        return view('admin.userDetails.create');
+        $this->data['userDetail'] = null;
+        return view('admin.userDetails.create', $this->data);
     }
 
     /**
@@ -47,8 +48,8 @@ class UserDetailController extends Controller
             $userDetail->foto = $request->file('foto')->getClientOriginalName();
             $userDetail->save();
         }
-        Alert::success('Success Tile', 'Biodata berhasil diperbarui, sekarang anda dapat mulai menulis cerita! ');
-        return back();
+        Alert::success('Berhasil', 'Biodata berhasil diperbarui, sekarang anda dapat mulai menulis cerita! ');
+        return redirect()->route('userdetails.show', Auth::user()->id);
     }
 
     /**
@@ -57,7 +58,7 @@ class UserDetailController extends Controller
      * @param  \App\UserDetail  $userDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(UserDetail $userDetail)
+    public function show($userDetail)
     {
         $this->data['user'] = User::find(Auth::user()->id);
         $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
@@ -72,7 +73,9 @@ class UserDetailController extends Controller
      */
     public function edit(UserDetail $userDetail)
     {
-        //
+        $this->data['user'] = User::find(Auth::user()->id);
+        $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
+        return view('admin.userDetails.edit', $this->data);
     }
 
     /**
@@ -82,9 +85,29 @@ class UserDetailController extends Controller
      * @param  \App\UserDetail  $userDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserDetail $userDetail)
+    public function update(UserDetailRequest $request, $user)
     {
-        //
+        $userDetail = $request->except('_token');
+
+        $updatedUser = User::findOrFail($user);
+        $updatedUser->update($userDetail);
+
+        $updatedUserDetail = UserDetail::where('user_id', $user)->first();
+        $oldFoto = $updatedUserDetail->foto;
+
+        if ($userDetail['foto'] === null) {
+            $userDetail['foto'] = $oldFoto;
+        }
+
+        $updatedUserDetail->update($userDetail);
+
+        if ($request->has('foto') && $request->foto != "undefined") {
+            $request->file('foto')->move('admin/img/user/', $request->file('foto')->getClientOriginalName());
+            $updatedUserDetail->foto = $request->file('foto')->getClientOriginalName();
+            $updatedUserDetail->save();
+        }
+        Alert::success('Update Sukses', 'Biodata berhasil diperbarui! ');
+        return redirect()->route('userdetails.show', $user);
     }
 
     /**

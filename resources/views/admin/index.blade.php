@@ -67,8 +67,11 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            @if ($userDetail)
+            <a class="collapse-item" href="{{ route('userdetails.show', Auth::user()->id) }}">Lihat</a>
+            @else
             <a class="collapse-item" href="{{ route('userdetails.create') }}">Tambahkan</a>
-            {{-- <a class="collapse-item" href="{{ route('userdetails.edit') }}">Edit</a> --}}
+            @endif
           </div>
         </div>
       </li>
@@ -183,10 +186,16 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>{{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
               </div>
             </li>
 

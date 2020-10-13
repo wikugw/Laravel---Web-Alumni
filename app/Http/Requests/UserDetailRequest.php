@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\UserDetail;
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class UserDetailRequest extends FormRequest
 {
@@ -23,11 +25,24 @@ class UserDetailRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'alamat' => 'required',
-            'angkatan' => 'required',
-            'jurusan' => 'required',
-            'no_hp' => 'required|numeric|digits:12'
-        ];
+        if ($this->method() == 'PUT') {
+            return [
+                'name' => 'required|string|max:191',
+                'email' => 'required|unique:users,email,' . Auth::user()->id . '|max:191',
+                'alamat' => 'required',
+                'angkatan' => 'required',
+                'jurusan' => 'required',
+                'no_hp' => 'required|numeric|digits:12',
+                'facebook' => 'nullable|url|unique:user_details',
+                'foto' => 'nullable|image'
+            ];
+        } else {
+            return [
+                'alamat' => 'required',
+                'angkatan' => 'required',
+                'jurusan' => 'required',
+                'no_hp' => 'required|numeric|digits:12'
+            ];
+        }
     }
 }

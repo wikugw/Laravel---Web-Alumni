@@ -151,6 +151,6 @@
 </div>
 
 <div class="form-footer pb-3">
-    <a href="#" class="btn btn-block btn-success btn-default shadow-lg">Edit Biodata</a>
+    <a href="{{ route('userdetails.edit', $user->id) }}" class="btn btn-block btn-success btn-default shadow-lg">Edit Biodata</a>
 </div>
 @endsection
