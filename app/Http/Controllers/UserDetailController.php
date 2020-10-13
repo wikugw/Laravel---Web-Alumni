@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UserDetail;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Alert;
@@ -58,7 +59,9 @@ class UserDetailController extends Controller
      */
     public function show(UserDetail $userDetail)
     {
-        //
+        $this->data['user'] = User::find(Auth::user()->id);
+        $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
+        return view('admin.userDetails.index', $this->data);
     }
 
     /**
