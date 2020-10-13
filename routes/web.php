@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('welcome');
 });
 
 Auth::routes();
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+    Route::resource('users', 'userController');
+    Route::get('users/{id}/authenticate', 'userController@authenticate')->name('users.authenticate');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
