@@ -23,6 +23,7 @@ Auth::routes();
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('users', 'userController');
     Route::get('users/{id}/authenticate', 'userController@authenticate')->name('users.authenticate');
+    Route::resource('userdetails', 'userDetailController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
