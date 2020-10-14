@@ -1,6 +1,15 @@
 @extends('admin.index')
 
 @section('content')
+@if (Auth::user()->isAuthenticated)
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Group Telegram</h6>
+    </div>
+    <div class="card-body">
+        <p>Jangan lupa juga gabung grup telegram untuk mengetahui informasi dari alumni lain</p>
+    </div>
+</div>
 <form action="{{ route('userdetails.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card shadow mb-4">
@@ -111,4 +120,14 @@
         <button type="submit" class="btn btn-block btn-primary btn-default shadow-lg">Save</button>
     </div>
 </form>
+@else
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Menunggu persetujuan</h6>
+    </div>
+    <div class="card-body">
+        <p>tidak dapat memperbarui biodata sebelum mendapat verifikasi dari admin</p>
+    </div>
+</div>
+@endif
 @endsection

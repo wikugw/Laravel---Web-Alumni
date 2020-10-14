@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('content')
+
 <form action="{{ route('cerita.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 <div class="card shadow mb-4">
@@ -41,4 +42,5 @@
     <button type="submit" class="btn btn-block btn-primary btn-default shadow-lg">Publikasikan Cerita</button>
 </div>
 </form>
+
 @endsection

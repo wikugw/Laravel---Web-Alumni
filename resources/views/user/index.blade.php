@@ -36,7 +36,7 @@
 	          <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="{{ route('cerita') }}" class="nav-link">Cerita</a></li>
 	          <li class="nav-item"><a href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <li class="nav-item"><a href="{{ Auth::user() ? route('userdetails.show', Auth::user()->id) : route('login') }}" class="nav-link">{{ Auth::user() ? Auth::user()->name : 'Login' }}</a></li>
 	        </ul>
 	      </div>
 	    </div>

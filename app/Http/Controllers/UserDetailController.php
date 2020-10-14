@@ -62,7 +62,10 @@ class UserDetailController extends Controller
     {
         $this->data['user'] = User::find(Auth::user()->id);
         $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
-        return view('admin.userDetails.index', $this->data);
+        if ($this->data['userDetail']) {
+            return view('admin.userDetails.index', $this->data);
+        }
+        return redirect()->route('cerita.create');
     }
 
     /**
