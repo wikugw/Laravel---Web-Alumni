@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('user.index');
+})->name('start');
 
 Auth::routes();
 
@@ -26,4 +27,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('userdetails', 'userDetailController');
 });
 
+Route::get('/alumni', 'HomeController@alumni')->name('alumni');
+Route::get('alumni/{id}', 'HomeController@alumniDetail')->name('alumni.detail');
 Route::get('/home', 'HomeController@index')->name('home');

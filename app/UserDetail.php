@@ -17,4 +17,9 @@ class UserDetail extends Model
         'instagram',
         'twitter'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
