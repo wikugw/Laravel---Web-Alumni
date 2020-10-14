@@ -26,104 +26,106 @@
                         <p>Angkatan {{ $alumniDetail->angkatan }}</p>
                         <div class="tabulation-2 mt-4">
                             <ul class="nav nav-pills nav-fill d-md-flex d-block">
-                              <li class="nav-item mb-md-0 mb-2">
-                                <a class="nav-link active py-2" data-toggle="tab" href="#home1">Biodata</a>
-                              </li>
-                              <li class="nav-item px-lg-2 mb-md-0 mb-2">
-                                <a class="nav-link py-2" data-toggle="tab" href="#home2">Alamat</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link py-2 mb-md-0 mb-2" data-toggle="tab" href="#home3">Sosmed</a>
-                              </li>
+                                <li class="nav-item mb-md-0 mb-2">
+                                    <a class="nav-link active py-2" data-toggle="tab" href="#home1">Biodata</a>
+                                </li>
+                                <li class="nav-item px-lg-2 mb-md-0 mb-2">
+                                    <a class="nav-link py-2" data-toggle="tab" href="#home2">Alamat</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link py-2 mb-md-0 mb-2" data-toggle="tab" href="#home3">Sosmed</a>
+                                </li>
                             </ul>
                             <div class="tab-content bg-light rounded mt-2">
-                              <div class="tab-pane container p-0 active" id="home1">
-                                <div class="row">
-                                    <div class="col-6">
-                                       <div class="row">
-                                        <div class="col-3">
-                                            <span class="icon-phone"></span>
+                                <div class="tab-pane container p-0 active" id="home1">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <span class="icon-phone"></span>
+                                                </div>
+                                                <div class="col-1">
+                                                    <span>:</span>
+                                                </div>
+                                                <div class="col-7">
+                                                    <span>{{ $alumniDetail->no_hp }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-1">
-                                            <span>:</span>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <span class="icon-envelope"></span>
+                                                </div>
+                                                <div class="col-1">
+                                                    <span>:</span>
+                                                </div>
+                                                <div class="col-7">
+                                                    <span>{{ $alumniDetail->user->email }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-7">
-                                            <span>{{ $alumniDetail->no_hp }}</span>
-                                        </div>
-                                       </div>
                                     </div>
-                                    <div class="col-6">
+                                </div>
+                                <div class="tab-pane container p-0 fade" id="home2">
+                                    <p>{{ $alumniDetail->alamat }}</p>
+                                </div>
+                                <div class="tab-pane container p-0 fade" id="home3">
+                                    @if ($alumniDetail->facebook)
+                                    <div class="col-12">
                                         <div class="row">
                                             <div class="col-3">
-                                                <span class="icon-envelope"></span>
+                                                <span class="icon-facebook"></span>
                                             </div>
                                             <div class="col-1">
                                                 <span>:</span>
                                             </div>
                                             <div class="col-7">
-                                                <span>{{ $alumniDetail->user->email }}</span>
+                                                <a
+                                                    href="{{ $alumniDetail->facebook }}">{{ $alumniDetail->facebook }}</a>
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
+                                    @if ($alumniDetail->twitter)
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <span class="icon-twitter"></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7">
+                                                <a href="{{ $alumniDetail->twitter }}">{{ $alumniDetail->twitter }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if ($alumniDetail->instagram)
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <span class="icon-instagram"></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7">
+                                                <a
+                                                    href="{{ $alumniDetail->instagram }}">{{ $alumniDetail->instagram }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
-                              </div>
-                              <div class="tab-pane container p-0 fade" id="home2">
-                                  <p>{{ $alumniDetail->alamat }}</p>
-                              </div>
-                              <div class="tab-pane container p-0 fade" id="home3">
-                                  @if ($alumniDetail->facebook)
-                                  <div class="col-12">
-                                    <div class="row">
-                                     <div class="col-3">
-                                         <span class="icon-facebook"></span>
-                                     </div>
-                                     <div class="col-1">
-                                         <span>:</span>
-                                     </div>
-                                     <div class="col-7">
-                                         <a href="{{ $alumniDetail->facebook }}">{{ $alumniDetail->facebook }}</a>
-                                     </div>
-                                    </div>
-                                 </div>
-                                  @endif
-                                  @if ($alumniDetail->twitter)
-                                  <div class="col-12">
-                                    <div class="row">
-                                     <div class="col-3">
-                                         <span class="icon-twitter"></span>
-                                     </div>
-                                     <div class="col-1">
-                                         <span>:</span>
-                                     </div>
-                                     <div class="col-7">
-                                         <a href="{{ $alumniDetail->twitter }}">{{ $alumniDetail->twitter }}</a>
-                                     </div>
-                                    </div>
-                                 </div>
-                                  @endif
-                                  @if ($alumniDetail->instagram)
-                                  <div class="col-12">
-                                    <div class="row">
-                                     <div class="col-3">
-                                         <span class="icon-instagram"></span>
-                                     </div>
-                                     <div class="col-1">
-                                         <span>:</span>
-                                     </div>
-                                     <div class="col-7">
-                                         <a href="{{ $alumniDetail->instagram }}">{{ $alumniDetail->instagram }}</a>
-                                     </div>
-                                    </div>
-                                 </div>
-                                  @endif
-                              </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-thumbnail" src="{{ URL::asset('admin/img/user/' . $alumniDetail->foto) }}"/>
+                <img class="img-thumbnail" src="{{ URL::asset('admin/img/user/' . $alumniDetail->foto) }}" />
             </div>
         </div>
     </div>

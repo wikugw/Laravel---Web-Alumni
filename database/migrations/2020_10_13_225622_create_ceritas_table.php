@@ -15,6 +15,10 @@ class CreateCeritasTable extends Migration
     {
         Schema::create('ceritas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('judul');
+            $table->string('foto');
+            $table->text('cerita');
             $table->timestamps();
         });
     }

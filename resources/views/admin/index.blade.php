@@ -85,7 +85,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             @if ($userDetail)
-            <a class="collapse-item" href="{{ route('userdetails.show', Auth::user()->id) }}">Tulis</a>
+            <a class="collapse-item" href="{{ route('cerita.create') }}">Tulis</a>
             @endif
           </div>
         </div>
@@ -270,6 +270,20 @@
   <!-- Page level custom scripts -->
   <script src="{{ URL::asset('admin/js/demo/datatables-demo.js') }}"></script>
 
+  {{-- cokeditor --}}
+
+  <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+
+  <script>
+      ClassicEditor
+          .create( document.querySelector( '.ckeditor' ) )
+          .then( editor => {
+              console.log( editor );
+          } )
+          .catch( error => {
+              console.error( error );
+          } );
+  </script>
 </body>
 
 </html>

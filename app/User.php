@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\UserDetail');
     }
+
+    public function cerita()
+    {
+        return $this->hasMany('App\Cerita');
+    }
 }

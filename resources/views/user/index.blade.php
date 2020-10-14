@@ -26,15 +26,15 @@
 
 	  <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{ route('start') }}">Read<i>it</i>.</a>
+	      <a class="navbar-brand" href="{{ route('home') }}">Read<i>it</i>.</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Articles</a></li>
+	          <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="{{ route('cerita') }}" class="nav-link">Cerita</a></li>
 	          <li class="nav-item"><a href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	        </ul>
@@ -50,7 +50,7 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="logo"><a href="{{ route('start') }}">Read<span>it</span>.</a></h2>
+              <h2 class="logo"><a href="{{ route('home') }}">Read<span>it</span>.</a></h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
