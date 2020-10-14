@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\UserDetail;
 use Auth;
 use Alert;
+use App\Http\Requests\ceritaRequest;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use App\User;
 
@@ -39,7 +40,7 @@ class CeritaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ceritaRequest $request)
     {
         $cerita = $request->except('_token');
         $cerita['user_id'] = Auth::user()->id;
@@ -60,7 +61,7 @@ class CeritaController extends Controller
             . $link;
 
         Telegram::sendMessage([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID', -1001392622321.0),
+            'chat_id' => env('TELEGRAM_CHANNEL_ID',),
             'parse_mode' => 'HTML',
             'text' => $text
         ]);
@@ -102,7 +103,7 @@ class CeritaController extends Controller
      * @param  \App\Cerita  $cerita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $cerita)
+    public function update(ceritaRequest $request, $cerita)
     {
         $updatedCerita = Cerita::findOrFail($cerita);
 

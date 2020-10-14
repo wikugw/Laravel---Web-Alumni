@@ -46,9 +46,8 @@ class HomeController extends Controller
 
     public function alumni()
     {
-        $this->data['alumnis'] = User::all();
+        $this->data['alumnis'] = User::where('isAdmin', '0')->get();
         if ($this->data['alumnis']->isNotEmpty()) {
-            return 'true';
             foreach ($this->data['alumnis'] as $alumni) {
                 $alumniId[] = $alumni->id;
             }
@@ -62,6 +61,7 @@ class HomeController extends Controller
     public function alumniDetail($id)
     {
         $this->data['alumniDetail'] = UserDetail::where('user_id', $id)->first();
+        $this->data['ceritas'] = Cerita::where('user_id', $id)->get();
         return view('user.alumniDetail', $this->data);
     }
 

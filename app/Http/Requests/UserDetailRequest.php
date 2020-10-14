@@ -25,6 +25,7 @@ class UserDetailRequest extends FormRequest
      */
     public function rules()
     {
+        $userDetail = UserDetail::where('user_id', Auth::user()->id)->first();
         if ($this->method() == 'PUT') {
             return [
                 'name' => 'required|string|max:191',
@@ -33,7 +34,9 @@ class UserDetailRequest extends FormRequest
                 'angkatan' => 'required',
                 'jurusan' => 'required',
                 'no_hp' => 'required|numeric|digits:12',
-                'facebook' => 'nullable|url|unique:user_details',
+                'facebook' => 'nullable|url',
+                'twitter' => 'nullable|url',
+                'instagram' => 'nullable|url',
                 'foto' => 'nullable|image'
             ];
         } else {
@@ -41,7 +44,11 @@ class UserDetailRequest extends FormRequest
                 'alamat' => 'required',
                 'angkatan' => 'required',
                 'jurusan' => 'required',
-                'no_hp' => 'required|numeric|digits:12'
+                'no_hp' => 'required|numeric|digits:12',
+                'facebook' => 'nullable|url',
+                'twitter' => 'nullable|url',
+                'instagram' => 'nullable|url',
+                'foto' => 'nullable|image'
             ];
         }
     }

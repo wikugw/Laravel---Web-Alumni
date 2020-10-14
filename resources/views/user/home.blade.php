@@ -9,7 +9,7 @@
             data-scrollax-parent="true">
             <div class="col-md-12 ftco-animate">
                 <h2 class="subheading">Hello! Selamat datang di Sistem Informasi Ikatan Alumni Pesantren</h2>
-                <h1 class="mb-4 mb-md-0">Al Binaa</h1>
+                <h1 class="mb-4 mb-md-0" style="color: black">Al Binaa</h1>
                 <div class="row">
                     <div class="col-md-7">
                         <div class="text">

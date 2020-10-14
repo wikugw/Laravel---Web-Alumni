@@ -32,14 +32,14 @@
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="{{ route('cerita') }}" class="nav-link">Cerita</a></li>
-              <li class="nav-item"><a href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
+	        <ul class="navbar-nav ml-auto" >
+	          <li class="nav-item"><a  style="color: black"href="{{ route('home') }}" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a style="color: black" href="{{ route('cerita') }}" class="nav-link">Cerita</a></li>
+              <li class="nav-item"><a  style="color: black"href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
               @if (Auth::user())
-              <li class="nav-item"><a href="{{ Auth::user()->isAdmin ? route('users.index') : route('userdetails.show', Auth::user()->id) }}" class="nav-link">{{  Auth::user()->name  }}</a></li>
+              <li class="nav-item"><a  style="color: black"href="{{ Auth::user()->isAdmin ? route('users.index') : route('userdetails.show', Auth::user()->id) }}" class="nav-link">{{  Auth::user()->name  }}</a></li>
               @else
-              <li class="nav-item"><a href="{{  route('login') }}" class="nav-link"> Login' </a></li>
+              <li class="nav-item"><a  style="color: black"href="{{  route('login') }}" class="nav-link"> Login' </a></li>
               @endif
 	        </ul>
 	      </div>

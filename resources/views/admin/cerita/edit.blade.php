@@ -30,7 +30,10 @@
         {{-- foto  --}}
         <div class="form-group">
             <label for="foto">Foto Header</label>
-            <input type="file" class="form-control" name="foto" id="foto">
+            <input type="file" class="form-control @error('no_hp') is-invalid @enderror" name="foto" id="foto">
+            @error('foto')
+            <div class="text-muted">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-footer float-right pr-3">
             <small style="color: red">*) wajib diisi</small>

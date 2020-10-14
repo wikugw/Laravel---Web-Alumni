@@ -7,7 +7,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Group Telegram</h6>
     </div>
     <div class="card-body">
-        <p>Jangan lupa juga gabung grup <a href="https://t.me/ikatanalumnialbinaa">telegram</a> untuk mengetahui informasi dari alumni lain</p>
+        <p>Jangan lupa juga gabung grup <a target="_blank" href="https://t.me/ikatanalumnialbinaa">telegram</a> untuk mengetahui informasi dari alumni lain</p>
     </div>
 </div>
 <form action="{{ route('userdetails.store') }}" method="POST" enctype="multipart/form-data">
@@ -72,7 +72,10 @@
                     {{-- foto profil --}}
                     <div class="form-group">
                         <label for="foto">Foto Profile</label>
-                        <input type="file" class="form-control-file" name="foto" id="foto">
+                    <input type="file" class="form-control @error('no_hp') is-invalid @enderror" name="foto" id="foto">
+                        @error('foto')
+                        <div class="text-muted">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-footer float-right pr-3">
                         <small style="color: red">*) wajib diisi</small>
