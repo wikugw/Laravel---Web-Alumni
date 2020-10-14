@@ -7,6 +7,8 @@ use App\User;
 use App\UserDetail;
 use Illuminate\Http\Request;
 
+use Telegram\Bot\Laravel\Facades\Telegram;
+
 class HomeController extends Controller
 {
     /**
@@ -16,7 +18,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -46,10 +47,15 @@ class HomeController extends Controller
     public function alumni()
     {
         $this->data['alumnis'] = User::all();
-        foreach ($this->data['alumnis'] as $alumni) {
-            $alumniId[] = $alumni->id;
+        if ($this->data['alumnis']->isNotEmpty()) {
+            return 'true';
+            foreach ($this->data['alumnis'] as $alumni) {
+                $alumniId[] = $alumni->id;
+            }
+            $this->data['alumniDetails'] = UserDetail::whereIn('user_id', $alumniId)->get();
+        } else {
+            $this->data['alumniDetails'] = [];
         }
-        $this->data['alumniDetails'] = UserDetail::whereIn('user_id', $alumniId)->get();
         return view('user.alumni', $this->data);
     }
 
@@ -57,5 +63,11 @@ class HomeController extends Controller
     {
         $this->data['alumniDetail'] = UserDetail::where('user_id', $id)->first();
         return view('user.alumniDetail', $this->data);
+    }
+
+    public function updatedActivity()
+    {
+        $activity = Telegram::getUpdates();
+        dd($activity);
     }
 }

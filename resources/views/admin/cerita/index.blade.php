@@ -21,7 +21,7 @@
                         <td>{{ $cerita->judul }}</td>
                         <td>
 
-                            <a href="#" class="btn btn-info btn-sm">
+                            <a target="_blank" href="{{ route('cerita.detail', $cerita->id) }}" class="btn btn-info btn-sm">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="{{ route('cerita.edit', $cerita->id) }}" class="btn btn-success btn-sm">
@@ -30,7 +30,7 @@
                             <form action="{{ route('cerita.destroy', $cerita->id) }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus cerita?')">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>

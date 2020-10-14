@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Readit - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Ikatan Alumni Santri Al Binaa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,7 +26,7 @@
 
 	  <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{ route('home') }}">Read<i>it</i>.</a>
+	      <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ URL::asset('user/images/ilumina black.png') }}" style="height: 50px"/></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -35,8 +35,12 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="{{ route('cerita') }}" class="nav-link">Cerita</a></li>
-	          <li class="nav-item"><a href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
-	          <li class="nav-item"><a href="{{ Auth::user() ? route('userdetails.show', Auth::user()->id) : route('login') }}" class="nav-link">{{ Auth::user() ? Auth::user()->name : 'Login' }}</a></li>
+              <li class="nav-item"><a href="{{ route('alumni') }}" class="nav-link">Alumni</a></li>
+              @if (Auth::user())
+              <li class="nav-item"><a href="{{ Auth::user()->isAdmin ? route('users.index') : route('userdetails.show', Auth::user()->id) }}" class="nav-link">{{  Auth::user()->name  }}</a></li>
+              @else
+              <li class="nav-item"><a href="{{  route('login') }}" class="nav-link"> Login' </a></li>
+              @endif
 	        </ul>
 	      </div>
 	    </div>

@@ -13,9 +13,6 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="text">
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the blind texts. Separated they live in Bookmarksgrove right at the coast of
-                                the Semantics, a large language ocean.</p>
                             <div class="mouse">
                                 <a href="#" class="mouse-icon">
                                     <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
@@ -37,7 +34,7 @@
                 <div class="case">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-xl-6 d-flex">
-                            <a href="{{ route('cerita.detail', $cerita->id) }}" class="img w-100 mb-3 mb-md-0" style="background-image:url('{{ asset('admin/img/cerita/' . $cerita->foto) }}');"></a>
+                            <a href="{{ route('cerita.detail', $cerita->id) }}" class="img w-100 mb-3 mb-md-0" style="background-image:url('{{ $cerita->foto ? asset('admin/img/cerita/' . $cerita->foto) :  asset('admin/img/cerita/default.jpg')}}');"></a>
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-6 d-flex">
                             <div class="text w-100 pl-md-3">

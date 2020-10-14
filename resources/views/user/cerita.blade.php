@@ -13,9 +13,6 @@ data-stellar-background-ratio="0.5">
             <div class="row">
                 <div class="col-md-7">
                     <div class="text">
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of
-                            the Semantics, a large language ocean.</p>
                         <div class="mouse">
                             <a href="#" class="mouse-icon">
                                 <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
@@ -35,7 +32,7 @@ data-stellar-background-ratio="0.5">
         @forelse ($ceritas as $cerita)
         <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry justify-content-end">
-            <a href="{{ route('cerita.detail', $cerita->id) }}" class="block-20" style="background-image:url('{{ asset('admin/img/cerita/' . $cerita->foto) }}');">
+            <a href="{{ route('cerita.detail', $cerita->id) }}" class="block-20" style="background-image:url('{{ $cerita->foto ? asset('admin/img/cerita/' . $cerita->foto) : asset('admin/img/cerita/default.jpg')}}');">
             </a>
             <div class="text p-4 float-right d-block">
                 <div class="topper d-flex align-items-center">

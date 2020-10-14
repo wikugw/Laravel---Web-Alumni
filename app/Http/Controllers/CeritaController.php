@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\UserDetail;
 use Auth;
 use Alert;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use App\User;
 
 class CeritaController extends Controller
 {
@@ -47,6 +49,22 @@ class CeritaController extends Controller
             $cerita->foto = $request->file('foto')->getClientOriginalName();
             $cerita->save();
         }
+
+        $penulisDetail = UserDetail::where('user_id', Auth::user()->id)->first();
+        $penulis = User::findOrFail(Auth::user()->id);
+        $link = route('cerita.detail', $cerita->id);
+
+        $text = "<b>$penulis->name</b> dari angkatan <b>$penulisDetail->angkatan</b> telah menulis sebuah cerita dengan judul\n"
+            . "<b>$cerita->judul</b>\n"
+            . "tekan link dibawah untuk mulai membaca!\n"
+            . $link;
+
+        Telegram::sendMessage([
+            'chat_id' => env('TELEGRAM_CHANNEL_ID', -1001392622321.0),
+            'parse_mode' => 'HTML',
+            'text' => $text
+        ]);
+
         Alert::success('Berhasil', 'Berhasil mempublis cerita! ');
         return redirect()->route('cerita.show', Auth::user()->id);
     }

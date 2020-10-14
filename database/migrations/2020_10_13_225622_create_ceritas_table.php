@@ -17,7 +17,7 @@ class CreateCeritasTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('judul');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->text('cerita');
             $table->timestamps();
         });

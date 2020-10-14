@@ -29,3 +29,4 @@ Route::get('alumni/{id}', 'HomeController@alumniDetail')->name('alumni.detail');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/cerita', 'HomeController@cerita')->name('cerita');
 Route::get('/cerita/{id}', 'HomeController@ceritaDetail')->name('cerita.detail');
+Route::get('/updated-activity', 'HomeController@updatedActivity');

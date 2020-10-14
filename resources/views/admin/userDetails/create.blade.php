@@ -7,7 +7,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Group Telegram</h6>
     </div>
     <div class="card-body">
-        <p>Jangan lupa juga gabung grup telegram untuk mengetahui informasi dari alumni lain</p>
+        <p>Jangan lupa juga gabung grup <a href="https://t.me/ikatanalumnialbinaa">telegram</a> untuk mengetahui informasi dari alumni lain</p>
     </div>
 </div>
 <form action="{{ route('userdetails.store') }}" method="POST" enctype="multipart/form-data">

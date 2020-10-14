@@ -65,7 +65,7 @@ class UserDetailController extends Controller
         if ($this->data['userDetail']) {
             return view('admin.userDetails.index', $this->data);
         }
-        return redirect()->route('cerita.create');
+        return redirect()->route('userdetails.create');
     }
 
     /**
