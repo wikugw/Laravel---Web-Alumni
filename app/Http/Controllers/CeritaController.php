@@ -61,7 +61,7 @@ class CeritaController extends Controller
             . $link;
 
         Telegram::sendMessage([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID',),
+            'chat_id' => env('TELEGRAM_CHANNEL_ID', ),
             'parse_mode' => 'HTML',
             'text' => $text
         ]);

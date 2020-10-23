@@ -28,6 +28,15 @@
                         <div class="text-muted">{{ $message }}</div>
                         @enderror
                     </div>
+                    {{-- title --}}
+                    <div class="form-group">
+                        <label for="title">Title <span style="color: red">*</span></label>
+                        <textarea class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                            rows="5">{{ old('title') }}</textarea>
+                        @error('title')
+                        <div class="text-muted">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                 </div>
                 <div class="col-4">
@@ -50,10 +59,23 @@
                         <select name="jurusan" value="{{ old('jurusan') }}"
                             class="form-control @error('jurusan') is-invalid @enderror">
                             <option value="" holder>Pilih Jurusan</option>
-                            <option value="syari" holder>Syari</option>
-                            <option value="ashri" holder>Ashri</option>
+                            <option value="Syari" holder>Syari</option>
+                            <option value="Ashri" holder>Ashri</option>
                         </select>
                         @error('jurusan')
+                        <div class="text-muted">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- select kelamin --}}
+                    <div class="form-group">
+                        <label for="kelamin">Kelamin <span style="color: red">*</span></label>
+                        <select name="kelamin" value="{{ old('kelamin') }}"
+                            class="form-control @error('kelamin') is-invalid @enderror">
+                            <option value="" holder>Pilih kelamin</option>
+                            <option value="Putra" holder>Putra</option>
+                            <option value="Putri" holder>Putri</option>
+                        </select>
+                        @error('kelamin')
                         <div class="text-muted">{{ $message }}</div>
                         @enderror
                     </div>

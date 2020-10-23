@@ -15,7 +15,9 @@ class UserDetail extends Model
         'foto',
         'facebook',
         'instagram',
-        'twitter'
+        'twitter',
+        'title',
+        'kelamin'
     ];
 
     public function user()

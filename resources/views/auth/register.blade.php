@@ -26,20 +26,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="NIS" class="col-md-4 col-form-label text-md-right">{{ __('NIS') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="NIS" type="text" class="form-control @error('NIS') is-invalid @enderror" name="NIS" value="{{ old('NIS') }}" required autocomplete="NIS" autofocus>
-
-                                @error('NIS')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

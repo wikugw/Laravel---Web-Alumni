@@ -37,7 +37,9 @@ class UserDetailRequest extends FormRequest
                 'facebook' => 'nullable|url',
                 'twitter' => 'nullable|url',
                 'instagram' => 'nullable|url',
-                'foto' => 'nullable|image'
+                'foto' => 'nullable|image',
+                'title' => 'required',
+                'kelamin' => 'required'
             ];
         } else {
             return [
@@ -48,7 +50,9 @@ class UserDetailRequest extends FormRequest
                 'facebook' => 'nullable|url',
                 'twitter' => 'nullable|url',
                 'instagram' => 'nullable|url',
-                'foto' => 'nullable|image'
+                'foto' => 'nullable|image',
+                'title' => 'required',
+                'kelamin' => 'required'
             ];
         }
     }

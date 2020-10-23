@@ -1,7 +1,7 @@
 @extends('user.index')
 
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image:url('{{  asset('user/images/bg_3.jpg')}}');">
     <div class="overlay"></div>
     <div class="container">
       <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -22,18 +22,19 @@
       </div>
       <div class="row ftco-animate">
             @forelse ($alumniDetails as $alumniDetail)
-            <div class="item col-lg-4">
+            <div class="item col-lg-6">
                 <div class="testimony-wrap py-4">
                   <div class="text">
                     <div class="row d-flex align-items-center">
-                        <div class="col-6">
+                        <div class="col-4">
                             <img class="img-fluid" style="height: 150px; width: 150px; border-radius: 75px; object-fit: cover" src="{{  ($alumniDetail->foto ? URL::asset('admin/img/user/' . $alumniDetail->foto) : URL::asset('admin/img/user/default.png')) }}" />
                         </div>
-                        <div class="col-6">
+                        <div class="col-8">
                             <div class="pb-2">
                                 <a style="color: black; font-size: 20px" href="{{ route('alumni.detail', $alumniDetail->user_id) }}" >{{ $alumniDetail->user->name }}</a>
                             </div>
-                            <span class="position">Angkatan {{ $alumniDetail->angkatan }}</span>
+                            <span class="position">Angkatan {{ $alumniDetail->angkatan }} | {{ $alumniDetail->kelamin }}</span><br>
+                            <span style="font-size: 16px; color: black" > {{ $alumniDetail->title }}</span>
                           </div>
                       </div>
                   </div>

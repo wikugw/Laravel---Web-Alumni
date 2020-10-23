@@ -87,10 +87,25 @@
                     <div class="text-muted">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-footer float-right pr-3">
-                    <small style="color: red">*) wajib diisi</small>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{-- nama --}}
+                <div class="form-group">
+                    <label for="title">title <span style="color: red">*</span></label>
+                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                    value="{{ old('title') ? old('title') : $userDetail->title }}" id="title" name="title" placeholder="Masukkan title">
+                    @error('title')
+                    <div class="text-muted">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
+        </div>
+        <div class="form-footer float-right pr-3">
+            <small style="color: red">*) wajib diisi</small>
         </div>
     </div>
 </div>

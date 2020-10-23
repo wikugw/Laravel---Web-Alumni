@@ -2,7 +2,7 @@
 
 @section('content')
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');"
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image:url('{{  asset('user/images/bg_4.jpg')}}');"
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -23,7 +23,8 @@
                     <div class="col-md-12 heading-section ftco-animate">
                         <span class="subheading">{{ $alumniDetail->jurusan }}</span>
                         <h2>{{ $alumniDetail->user->name }}</h2>
-                        <p>Angkatan {{ $alumniDetail->angkatan }}</p>
+                        <p>Angkatan {{ $alumniDetail->angkatan }} | {{ $alumniDetail->kelamin }}</p>
+                        <p> {{ $alumniDetail->title }}</p>
                         <div class="tabulation-2 mt-4">
                             <ul class="nav nav-pills nav-fill d-md-flex d-block">
                                 <li class="nav-item mb-md-0 mb-2">
@@ -41,30 +42,25 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-2">
                                                     <span class="icon-phone"></span>
                                                 </div>
-                                                <div class="col-1">
-                                                    <span>:</span>
-                                                </div>
-                                                <div class="col-7">
+                                                <div class="col-8">
                                                     <span>{{ $alumniDetail->no_hp }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-2">
                                                     <span class="icon-envelope"></span>
                                                 </div>
-                                                <div class="col-1">
-                                                    <span>:</span>
-                                                </div>
-                                                <div class="col-7">
+                                                <div class="col-8">
                                                     <span>{{ $alumniDetail->user->email }}</span>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="tab-pane container p-0 fade" id="home2">
@@ -124,8 +120,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <img class="img-thumbnail" src="{{ URL::asset('admin/img/user/' . $alumniDetail->foto) }}" />
+            <div class="col-lg-6 px-2">
+                <img class="img-thumbnail" src="{{ ($alumniDetail->foto ? URL::asset('admin/img/user/' . $alumniDetail->foto) : URL::asset('admin/img/user/default.png')) }}" style="width: 100%" />
             </div>
         </div>
     </div>
@@ -155,7 +151,7 @@
             </div>
             @empty
             <div class="row justify-content-center align-items-center">
-                <p>Belum ada cerita yang ditambahkan</p>
+                <p class="text-center">Belum ada cerita yang ditambahkan</p>
             </div>
             @endforelse
 

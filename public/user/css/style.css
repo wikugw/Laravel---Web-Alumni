@@ -8220,7 +8220,7 @@ h1, h2, h3, h4, h5,
     right: 0;
     bottom: 0;
     content: '';
-    opacity: .8;
+    opacity: 0;
     background: #f200ff;
     background: -moz-linear-gradient(45deg, #f200ff 0%, #ffba42 100%);
     background: -webkit-gradient(left bottom, right top, color-stop(0%, #f200ff), color-stop(100%, #ffba42));

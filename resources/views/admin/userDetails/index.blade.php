@@ -50,35 +50,6 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-4">
-                                <span class="font-weight-bold">NIS</span>
-                            </div>
-                            <div class="col-1">
-                                <span>:</span>
-                            </div>
-                            <div class="col-7">
-                                <span>{{ $user->NIS }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-4">
-                                <span class="font-weight-bold">No. HP</span>
-                            </div>
-                            <div class="col-1">
-                                <span>:</span>
-                            </div>
-                            <div class="col-7">
-                                <span>{{ $userDetail->no_hp }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- baris 2 --}}
-                <div class="row mt-2">
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-4">
                                 <span class="font-weight-bold">Jurusan</span>
                             </div>
                             <div class="col-1">
@@ -100,6 +71,19 @@
                             <div class="col-7">
                                 <span>{{ $userDetail->angkatan }}</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- baris 3 --}}
+                <div class="row mt-2">
+                    <div class="col-lg-12">
+                        <div class="row my-2">
+                                <div class="col-4 mb-2">
+                                    <span class="font-weight-bold">Title</span>
+                                </div>
+                                <div class="col-12">
+                                    <span>{{ $userDetail->title }}</span>
+                                </div>
                         </div>
                     </div>
                 </div>
