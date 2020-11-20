@@ -28,12 +28,18 @@ class HomeController extends Controller
     public function index()
     {
         $this->data['ceritas'] = Cerita::paginate(3);
+        foreach ($this->data['ceritas'] as $cerita) {
+            $cerita->foto = url('storage/' . $cerita->foto);
+        }
         return view('user.home', $this->data);
     }
 
     public function cerita()
     {
         $this->data['ceritas'] = Cerita::all();
+        foreach ($this->data['ceritas'] as $cerita) {
+            $cerita->foto = url('storage/' . $cerita->foto);
+        }
         return view('user.cerita', $this->data);
     }
 
@@ -41,6 +47,8 @@ class HomeController extends Controller
     {
         $this->data['cerita'] = Cerita::findOrFail($id);
         $this->data['penulis'] = UserDetail::where('user_id', $this->data['cerita']->user_id)->first();
+        $this->data['cerita']->foto = url('storage/' . $this->data['cerita']->foto);
+        $this->data['penulis']->foto = url('storage/' . $this->data['penulis']->foto);
         return view('user.detailCerita', $this->data);
     }
 
@@ -52,6 +60,9 @@ class HomeController extends Controller
                 $alumniId[] = $alumni->id;
             }
             $this->data['alumniDetails'] = UserDetail::whereIn('user_id', $alumniId)->get();
+            foreach ($this->data['alumniDetails'] as $alumniDetail) {
+                $alumniDetail->foto = url('storage/' . $alumniDetail->foto);
+            }
         } else {
             $this->data['alumniDetails'] = [];
         }
@@ -61,7 +72,11 @@ class HomeController extends Controller
     public function alumniDetail($id)
     {
         $this->data['alumniDetail'] = UserDetail::where('user_id', $id)->first();
+        $this->data['alumniDetail']->foto = url('storage/' . $this->data['alumniDetail']->foto);
         $this->data['ceritas'] = Cerita::where('user_id', $id)->get();
+        foreach ($this->data['ceritas'] as $cerita) {
+            $cerita->foto = url('storage/' . $cerita->foto);
+        }
         return view('user.alumniDetail', $this->data);
     }
 

@@ -45,10 +45,12 @@ class CeritaController extends Controller
         $cerita = $request->except('_token');
         $cerita['user_id'] = Auth::user()->id;
         $cerita = Cerita::create($cerita);
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('admin/img/cerita/', $request->file('foto')->getClientOriginalName());
-            $cerita->foto = $request->file('foto')->getClientOriginalName();
-            $cerita->save();
+
+        if ($request->has('foto')) {
+            $cerita['foto'] = $request->file('foto')->store(
+                'assets/cerita',
+                'public'
+            );
         }
 
         $penulisDetail = UserDetail::where('user_id', Auth::user()->id)->first();
@@ -60,8 +62,9 @@ class CeritaController extends Controller
             . "tekan link dibawah untuk mulai membaca!\n"
             . $link;
 
+        // -1001392622321.0
         Telegram::sendMessage([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID', ),
+            'chat_id' => env('TELEGRAM_CHANNEL_ID', -1001392622321.0),
             'parse_mode' => 'HTML',
             'text' => $text
         ]);
@@ -107,19 +110,17 @@ class CeritaController extends Controller
     {
         $updatedCerita = Cerita::findOrFail($cerita);
 
-        $oldFoto = $updatedCerita->foto;
-
-        if ($updatedCerita['foto'] === null) {
-            $updatedCerita['foto'] = $oldFoto;
-        }
         $params = $request->except('_token');
+
+        if ($request->has('foto')) {
+            $params['foto'] = $request->file('foto')->store(
+                'assets/cerita',
+                'public'
+            );
+        }
+
         $updatedCerita->update($params);
 
-        if ($request->has('foto') && $request->foto != "undefined") {
-            $request->file('foto')->move('admin/img/cerita/', $request->file('foto')->getClientOriginalName());
-            $updatedCerita->foto = $request->file('foto')->getClientOriginalName();
-            $updatedCerita->save();
-        }
         Alert::success('Update Sukses', 'Biodata berhasil diperbarui! ');
         return redirect()->route('cerita.show', Auth::user()->id);
     }

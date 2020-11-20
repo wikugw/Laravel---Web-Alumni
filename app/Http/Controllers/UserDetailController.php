@@ -42,12 +42,16 @@ class UserDetailController extends Controller
     {
         $userDetail = $request->except('_token');
         $userDetail['user_id'] = Auth::user()->id;
-        $userDetail = UserDetail::create($userDetail);
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('admin/img/user/', $request->file('foto')->getClientOriginalName());
-            $userDetail->foto = $request->file('foto')->getClientOriginalName();
-            $userDetail->save();
+
+        if ($request->has('foto')) {
+            $userDetail['foto'] = $request->file('foto')->store(
+                'assets/alumni',
+                'public'
+            );
         }
+
+        $userDetail = UserDetail::create($userDetail);
+
         Alert::success('Berhasil', 'Biodata berhasil diperbarui, sekarang anda dapat mulai menulis cerita! ');
         return redirect()->route('userdetails.show', Auth::user()->id);
     }
@@ -92,23 +96,20 @@ class UserDetailController extends Controller
     {
         $userDetail = $request->except('_token');
 
+        if ($request->has('foto')) {
+            $userDetail['foto'] = $request->file('foto')->store(
+                'assets/alumni',
+                'public'
+            );
+        }
+
         $updatedUser = User::findOrFail($user);
         $updatedUser->update($userDetail);
 
         $updatedUserDetail = UserDetail::where('user_id', $user)->first();
-        $oldFoto = $updatedUserDetail->foto;
-
-        if ($userDetail['foto'] === null) {
-            $userDetail['foto'] = $oldFoto;
-        }
 
         $updatedUserDetail->update($userDetail);
 
-        if ($request->has('foto') && $request->foto != "undefined") {
-            $request->file('foto')->move('admin/img/user/', $request->file('foto')->getClientOriginalName());
-            $updatedUserDetail->foto = $request->file('foto')->getClientOriginalName();
-            $updatedUserDetail->save();
-        }
         Alert::success('Update Sukses', 'Biodata berhasil diperbarui! ');
         return redirect()->route('userdetails.show', $user);
     }

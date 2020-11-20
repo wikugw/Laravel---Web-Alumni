@@ -20,7 +20,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 ftco-animate">
                 <p align="center" class="mb-5">
-                    <img src="{{ $cerita->foto ? URL::asset('admin/img/cerita/' . $cerita->foto) : URL::asset('admin/img/cerita/default.jpg')}}" alt="" class="img-fluid">
+                    <img src="{{ $cerita->foto ? $cerita->foto : URL::asset('admin/img/cerita/default.jpg')}}" alt="" class="img-fluid">
                 </p>
                 <h2 class="mb-3">{{ $cerita->judul }}</h2>
 
@@ -29,7 +29,7 @@
 
                 <div class="about-author d-flex p-4 bg-light">
                     <div class="bio mr-5">
-                        <img src="{{ $penulis->foto ? URL::asset('admin/img/user/' . $penulis->foto) : URL::asset('admin/img/user/default.png') }}" alt="Image placeholder"
+                        <img src="{{ $penulis->foto ?  $penulis->foto : URL::asset('admin/img/user/default.png') }}" alt="Image placeholder"
                             style="border-radius: 75px; height: 150px; width: 150px; object-fit: fill"
                             class="img-fluid mb-4">
                     </div>

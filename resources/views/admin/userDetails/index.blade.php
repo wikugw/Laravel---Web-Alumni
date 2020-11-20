@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-4">
                 @if ($userDetail->foto)
-                <img src="{{ URL::asset('admin/img/user/'.$userDetail->foto) }}" class="img-fluid rounded mb-3"
+                <img src="{{ Storage::url($userDetail->foto) }}" class="img-fluid rounded mb-3"
                     alt="...">
                 @else
                 <img src="{{ URL::asset('admin/img/user/default.png') }}" class="img-fluid rounded mb-3" alt="...">

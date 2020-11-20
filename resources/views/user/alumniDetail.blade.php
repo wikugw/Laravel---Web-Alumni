@@ -2,8 +2,8 @@
 
 @section('content')
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image:url('{{  asset('user/images/bg_4.jpg')}}');"
-    data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+    style="background-image:url('{{  asset('user/images/bg_4.jpg')}}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -77,8 +77,8 @@
                                                 <span>:</span>
                                             </div>
                                             <div class="col-7">
-                                                <a
-                                                    href="{{ $alumniDetail->facebook }}" target="_blank">{{ $alumniDetail->facebook }}</a>
+                                                <a href="{{ $alumniDetail->facebook }}"
+                                                    target="_blank">{{ $alumniDetail->facebook }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +93,8 @@
                                                 <span>:</span>
                                             </div>
                                             <div class="col-7">
-                                                <a href="{{ $alumniDetail->twitter }}" target="_blank">{{ $alumniDetail->twitter }}</a>
+                                                <a href="{{ $alumniDetail->twitter }}"
+                                                    target="_blank">{{ $alumniDetail->twitter }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -108,8 +109,8 @@
                                                 <span>:</span>
                                             </div>
                                             <div class="col-7">
-                                                <a
-                                                    href="{{ $alumniDetail->instagram }}" target="_blank">{{ $alumniDetail->instagram }}</a>
+                                                <a href="{{ $alumniDetail->instagram }}"
+                                                    target="_blank">{{ $alumniDetail->instagram }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +122,9 @@
                 </div>
             </div>
             <div class="col-lg-6 px-2">
-                <img class="img-thumbnail" src="{{ ($alumniDetail->foto ? URL::asset('admin/img/user/' . $alumniDetail->foto) : URL::asset('admin/img/user/default.png')) }}" style="width: 100%" />
+                <img class="img-thumbnail"
+                    src="{{ ($alumniDetail->foto ?  $alumniDetail->foto : URL::asset('admin/img/user/default.png')) }}"
+                    style="width: 100%" />
             </div>
         </div>
     </div>
@@ -132,22 +135,25 @@
             @forelse ($ceritas as $cerita)
             <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry justify-content-end">
-                <a href="{{ route('cerita.detail', $cerita->id) }}" class="block-20" style="background-image:url('{{ $cerita->foto ? asset('admin/img/cerita/' . $cerita->foto) : asset('admin/img/cerita/default.jpg')}}');">
-                </a>
-                <div class="text p-4 float-right d-block">
-                    <div class="topper d-flex align-items-center">
-                        <div class="one py-2 pl-3 pr-1 align-self-stretch">
-                            <span class="day">{{ $cerita->created_at->format('d') }}</span>
+                    <a href="{{ route('cerita.detail', $cerita->id) }}" class="block-20"
+                        style="background-image:url('{{ $cerita->foto ?  $cerita->foto : asset('admin/img/cerita/default.jpg')}}');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="topper d-flex align-items-center">
+                            <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                                <span class="day">{{ $cerita->created_at->format('d') }}</span>
+                            </div>
+                            <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                                <span class="yr">{{ $cerita->created_at->format('Y') }}</span>
+                                <span class="mos">{{ $cerita->created_at->format('M') }}</span>
+                            </div>
                         </div>
-                        <div class="two pl-0 pr-3 py-2 align-self-stretch">
-                            <span class="yr">{{ $cerita->created_at->format('Y') }}</span>
-                            <span class="mos">{{ $cerita->created_at->format('M') }}</span>
-                        </div>
+                        <h3 class="heading mb-3"><a
+                                href="{{ route('cerita.detail', $cerita->id) }}">{{ $cerita->judul }}</a></h3>
+                        <p><a href="{{ route('cerita.detail', $cerita->id) }}" class="btn-custom"><span
+                                    class="ion-ios-arrow-round-forward mr-3"></span>Read more</a></p>
                     </div>
-                    <h3 class="heading mb-3"><a href="{{ route('cerita.detail', $cerita->id) }}">{{ $cerita->judul }}</a></h3>
-                  <p><a href="{{ route('cerita.detail', $cerita->id) }}" class="btn-custom"><span class="ion-ios-arrow-round-forward mr-3"></span>Read more</a></p>
                 </div>
-              </div>
             </div>
             @empty
             <div class="row justify-content-center align-items-center">
@@ -155,7 +161,7 @@
             </div>
             @endforelse
 
-          </div>
+        </div>
     </div>
 </section>
 

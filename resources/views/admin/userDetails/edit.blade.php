@@ -15,8 +15,21 @@
                 <div class="form-group">
                     <label for="alamat">Alamat <span style="color: red">*</span></label>
                     <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat"
-                        rows="8">{{ old('alamat') ? old('alamat') : $userDetail->alamat }}</textarea>
+                        rows="4.5">{{ old('alamat') ? old('alamat') : $userDetail->alamat }}</textarea>
                     @error('alamat')
+                    <div class="text-muted">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- select Kelamin --}}
+                <div class="form-group">
+                    <label for="kelamin">kelamin <span style="color: red">*</span></label>
+                    <select name="kelamin" value="{{ old('kelamin') ? old('kelamin') : $userDetail->kelamin }}"
+                        class="form-control @error('kelamin') is-invalid @enderror">
+                        <option value="{{ old('kelamin') ? old('kelamin') : $userDetail->kelamin }}">{{ old('kelamin') ? old('kelamin') : $userDetail->kelamin }}</option>
+                        <option value="Putra" holder>Putra</option>
+                            <option value="Putri" holder>Putri</option>
+                    </select>
+                    @error('kelamin')
                     <div class="text-muted">{{ $message }}</div>
                     @enderror
                 </div>
