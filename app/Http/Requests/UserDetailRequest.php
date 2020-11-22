@@ -30,7 +30,10 @@ class UserDetailRequest extends FormRequest
             return [
                 'name' => 'required|string|max:191',
                 'email' => 'required|unique:users,email,' . Auth::user()->id . '|max:191',
-                'alamat' => 'required',
+                'adrress' => 'required',
+                'postal_code' => 'required',
+                'city_id' => 'required',
+                'province_id' => 'required',
                 'angkatan' => 'required',
                 'jurusan' => 'required',
                 'no_hp' => 'required|numeric|digits:12',
@@ -43,7 +46,10 @@ class UserDetailRequest extends FormRequest
             ];
         } else {
             return [
-                'alamat' => 'required',
+                'adrress' => 'required',
+                'postal_code' => 'required',
+                'city_id' => 'required',
+                'province_id' => 'required',
                 'angkatan' => 'required',
                 'jurusan' => 'required',
                 'no_hp' => 'required|numeric|digits:12',

@@ -252,6 +252,64 @@
             });
 
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select[name="province_id"]').on('change', function () {
+                var cityId = $(this).val();
+                if (cityId) {
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/getCity/ajax/' + cityId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            $('select[name="city_id"]').empty();
+                            $.each(data, function (key, value) {
+                                $('select[name="city_id"]').append(
+                                    '<option value="' +
+                                    key + '">' + value + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="city_id"]').empty();
+                }
+            });
+
+            var origin = $("#originCity").val();
+            var destination = $("#destinationCity").val();
+            var userId = $("#userId").val();
+            var token = $("#_token").val();
+
+            console.log(userId);
+
+            $('select[name="service"]').on('change', function () {
+                var paket = $(this).val();
+                if (paket) {
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/getservice',
+                        type: "POST",
+                        data: {
+                            _token: token,
+                            service: paket,
+                            origin: origin,
+                            destination: destination
+                        },
+                        success: function (dataResult) {
+                            $('#serviceTable tbody td').remove();
+                            dataResult.services.forEach(service => {
+                                console.log(paket);
+                                $('#serviceTable tbody').append(
+                                    '<tr> <td>' + service.service + ' - ' + service.description + '</td> <td> ' + service.cost[0].value + '</td> <td> ' + service.cost[0].etd + '</td> <td> <form action="http://127.0.0.1:8000/dashboard/souvenir" method="POST"> <input type="hidden" name="_token" value="' + token + '"> <input type="hidden" name="ongkos_kirim" value="' + service.cost[0].value + '"><input type="hidden" name="service" value="' + paket + '-' + service.service + '"> <input type="hidden" name="user_id" value="' + userId + '"> <button type="submit" onclick="return confirm(\'Data akan ditambahkan pada histori pengiriman souvenir, lanjutkan\')" class="btn btn-sm btn-info"><span class="fas fa-gift"></span></button> </form> </td> </tr>'
+                                )
+                            });
+                        }
+                    })
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

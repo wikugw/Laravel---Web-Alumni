@@ -6,6 +6,8 @@ use App\Cerita;
 use App\User;
 use App\UserDetail;
 use Illuminate\Http\Request;
+use App\City;
+use Illuminate\Support\Facades\Http;
 
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -84,5 +86,29 @@ class HomeController extends Controller
     {
         $activity = Telegram::getUpdates();
         dd($activity);
+    }
+
+
+    public function getCitiesAjax($id)
+    {
+        $cities = City::where('province_id', '=', $id)->pluck('city_name', 'id');
+
+        return json_encode($cities);
+    }
+
+    public function getService(Request $request)
+    {
+        $cek_ongkir['origin'] = (int)$request->origin;
+        $cek_ongkir['destination'] = (int)$request->destination;
+        $cek_ongkir['weight'] = 1;
+        $cek_ongkir['courier'] = $request->service;
+
+        // cek ongkir
+        $response = Http::asForm()->withHeaders([
+            'key' => '599cde1abca841e4b74a85474c131392'
+        ])->post('https://api.rajaongkir.com/starter/cost', $cek_ongkir);
+
+        $this->data['services'] = $response['rajaongkir']['results'][0]['costs'];
+        return response()->json($this->data);
     }
 }

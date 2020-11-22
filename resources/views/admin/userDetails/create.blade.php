@@ -19,15 +19,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
-                    {{-- alamat --}}
-                    <div class="form-group">
-                        <label for="alamat">Alamat <span style="color: red">*</span></label>
-                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat"
-                            rows="5">{{ old('alamat') }}</textarea>
-                        @error('alamat')
-                        <div class="text-muted">{{ $message }}</div>
-                        @enderror
-                    </div>
                     {{-- title --}}
                     <div class="form-group">
                         <label for="title">Title <span style="color: red">*</span></label>
@@ -102,6 +93,57 @@
                     <div class="form-footer float-right pr-3">
                         <small style="color: red">*) wajib diisi</small>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Update Biodata</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+
+                    {{-- adrress --}}
+                    <div class="form-group">
+                        <label for="adrress">adrress <span style="color: red">*</span></label>
+                        <textarea class="form-control @error('adrress') is-invalid @enderror" id="adrress" name="adrress"
+                            rows="5">{{ old('adrress') }}</textarea>
+                        @error('adrress')
+                        <div class="text-muted">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="col-6">
+                  {{-- kode pos --}}
+                  <div class="form-group">
+                    <label for="postal_code">Kode Pos <span style="color: red">*</span></label>
+                    <input type="number" class="form-control" id="postal_code" name="postal_code" placeholder="Masukkan Kode Pos">
+                </div>
+                {{-- select provinsi --}}
+                <div class="form-group">
+                    <label for="province_id">Provinsi <span style="color: red">*</span></label>
+                    <select name="province_id" class="form-control">
+                        <option value="" holder>Pilih Provinsi</option>
+                        @foreach ($provinces as $province)
+                            <option value="{{ $province->id }}">{{ $province->province }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                {{-- select kota --}}
+                <div class="form-group">
+                    <label for="city_id">Kota <span style="color: red">*</span></label>
+                    <select name="city_id" class="form-control">
+                        <option value="" holder>Pilih Kota</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 </div>
             </div>
 

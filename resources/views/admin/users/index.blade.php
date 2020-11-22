@@ -12,17 +12,16 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>NIS</th>
                         <th>Email</th>
                         <th>Status</th>
                         <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->NIS }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             @if ($user->isAuthenticated)
@@ -44,6 +43,9 @@
                             @else
                             <span class="badge badge-success">Alumni</span>
                             @endif
+                        </td>
+                        <td>
+                            <a  href="{{ route('users.kirimSouvenir', $user->id) }}" class="btn btn-sm btn-info"><span class="fas fa-gift"></span></a>
                         </td>
                     </tr>
                     @endforeach
