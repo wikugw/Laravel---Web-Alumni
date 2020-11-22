@@ -20,10 +20,14 @@ Auth::routes();
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('users', 'userController');
     Route::get('users/{id}/authenticate', 'userController@authenticate')->name('users.authenticate');
+    Route::get('users/{id}/kirimsouvenir', 'userController@KirimSouvenir')->name('users.kirimSouvenir');
     Route::resource('userdetails', 'userDetailController');
     Route::resource('cerita', 'CeritaController');
+    Route::resource('souvenir', 'SouvenirController');
 });
 
+Route::get('/getCity/ajax/{id}', 'HomeController@getCitiesAjax');
+Route::post('/getservice', 'HomeController@getService');
 Route::get('/alumni', 'HomeController@alumni')->name('alumni');
 Route::get('alumni/{id}', 'HomeController@alumniDetail')->name('alumni.detail');
 Route::get('/', 'HomeController@index')->name('home');

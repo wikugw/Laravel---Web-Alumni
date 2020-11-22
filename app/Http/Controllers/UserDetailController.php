@@ -7,7 +7,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Alert;
+use App\Address;
+use App\City;
 use App\Http\Requests\UserDetailRequest;
+use App\Province;
 
 class UserDetailController extends Controller
 {
@@ -29,6 +32,8 @@ class UserDetailController extends Controller
     public function create()
     {
         $this->data['userDetail'] = null;
+        $this->data['provinces'] = Province::all();
+        $this->data['cities'] = City::all();
         return view('admin.userDetails.create', $this->data);
     }
 
@@ -50,6 +55,7 @@ class UserDetailController extends Controller
             );
         }
 
+        $address = Address::create($userDetail);
         $userDetail = UserDetail::create($userDetail);
 
         Alert::success('Berhasil', 'Biodata berhasil diperbarui, sekarang anda dapat mulai menulis cerita! ');
@@ -80,7 +86,10 @@ class UserDetailController extends Controller
      */
     public function edit(UserDetail $userDetail)
     {
+        $this->data['provinces'] = Province::all();
+        $this->data['cities'] = City::all();
         $this->data['user'] = User::find(Auth::user()->id);
+        $this->data['address'] = Address::where('user_id', Auth::user()->id)->first();
         $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
         return view('admin.userDetails.edit', $this->data);
     }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Alert;
+use App\Address;
+use Auth;
+use Illuminate\Support\Facades\Http;
 
 class userController extends Controller
 {
@@ -95,5 +98,29 @@ class userController extends Controller
         $user->save();
         Alert::success('Success Tile', 'Alumni ' . $user['name'] . ' Berhasil diverifikasi');
         return back();
+    }
+
+    public function KirimSouvenir($id)
+    {
+        $this->data['user'] = User::findOrFail($id);
+        $this->data['admin'] = User::findOrFail(Auth::user()->id);
+        $this->data['userAddress'] = Address::where('user_id', $id)->first();
+        $this->data['adminAddress'] = Address::where('user_id', Auth::user()->id)->first();
+
+        $cek_ongkir['origin'] = (int)$this->data['adminAddress']['city_id'];
+        $cek_ongkir['destination'] = (int)$this->data['userAddress']['city_id'];
+        $cek_ongkir['weight'] = 1;
+        $cek_ongkir['courier'] = 'jne';
+
+        // cek ongkir
+        $response = Http::asForm()->withHeaders([
+            'key' => '599cde1abca841e4b74a85474c131392'
+        ])->post('https://api.rajaongkir.com/starter/cost', $cek_ongkir);
+
+        $this->data['services'] = $response['rajaongkir']['results'][0]['costs'];
+        $this->data['courier'] = 'jne';
+        // return $this->data;
+
+        return view('admin.users.kirimSouvenir', $this->data);
     }
 }
