@@ -15,6 +15,7 @@
                         <th>Service</th>
                         <th>Ongkos Kirim</th>
                         <th>tanggal kirim</th>
+                        <th>Resi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +25,17 @@
                         <td>{{ $souvenir->service }}</td>
                         <td>Rp. {{ $souvenir->ongkos_kirim }}</td>
                         <td>{{ Carbon\Carbon::parse($souvenir->created_at)->format('d-m-Y') }}</td>
-
+                        <td class="d-flex justify-content-center">
+                            @if($souvenir->resi)
+                            {{$souvenir->resi}}
+                            @else
+                            <a href = "{{route('souvenir.edit', $souvenir->id)}}"
+                                class="btn btn-sm btn-info"
+                            >
+                                Tambah Resi
+                            </a>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

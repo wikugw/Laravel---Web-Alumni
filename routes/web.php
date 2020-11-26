@@ -34,3 +34,5 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/cerita', 'HomeController@cerita')->name('cerita');
 Route::get('/cerita/{id}', 'HomeController@ceritaDetail')->name('cerita.detail');
 Route::get('/updated-activity', 'HomeController@updatedActivity');
+
+Route::get('/email/{id}', 'HomeController@email');

@@ -68,6 +68,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSouvenir"
+                    aria-expanded="true" aria-controls="collapseSouvenir">
+                    <i class="fas fa-fw fa-gift"></i>
+                    <span>Souvenir</span>
+                </a>
+                <div id="collapseSouvenir" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('souvenir.index') }}">Histori Pengiriman</a>
+                    </div>
+                </div>
+            </li>
             @else
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
@@ -280,8 +293,6 @@
             var destination = $("#destinationCity").val();
             var userId = $("#userId").val();
             var token = $("#_token").val();
-
-            console.log(userId);
 
             $('select[name="service"]').on('change', function () {
                 var paket = $(this).val();

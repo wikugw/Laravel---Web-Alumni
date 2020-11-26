@@ -9,7 +9,8 @@ class Souvenir extends Model
     protected $fillable = [
         'user_id',
         'service',
-        'ongkos_kirim'
+        'ongkos_kirim',
+        'resi'
     ];
 
     public function user()
