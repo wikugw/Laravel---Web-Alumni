@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Souvenir;
+use App\User;
+use App\Address;
+use Mail;
+use App\Mail\sendMail;
 use Illuminate\Http\Request;
 use Alert;
 
@@ -62,7 +66,8 @@ class SouvenirController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['souvenir'] = Souvenir::findOrFail($id);
+        return view('admin.souvenirs.edit', $this->data);
     }
 
     /**
@@ -74,7 +79,21 @@ class SouvenirController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'resi' => 'required|unique:souvenirs|max:191'
+        ]);
+
+        $souvenir = Souvenir::findOrFail($id);
+        $souvenir->resi = $request->resi;
+        $souvenir->save();
+
+        $user = User::find($souvenir->user_id);
+        $user->alamat = Address::where('user_id', $souvenir->user_id)->first();
+        $user->souvenir = $souvenir;
+        Mail::send(new sendMail($user));
+
+        Alert::success('Berhasil', 'Resi berhasil ditambahkan dan email email telah dikirimkan kepada alumni');
+        return redirect()->route('souvenir.index');
     }
 
     /**

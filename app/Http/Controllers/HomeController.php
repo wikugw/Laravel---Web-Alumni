@@ -8,6 +8,10 @@ use App\UserDetail;
 use Illuminate\Http\Request;
 use App\City;
 use Illuminate\Support\Facades\Http;
+use Mail;
+use App\Mail\sendMail;
+use App\Address;
+use App\Souvenir;
 
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -110,5 +114,13 @@ class HomeController extends Controller
 
         $this->data['services'] = $response['rajaongkir']['results'][0]['costs'];
         return response()->json($this->data);
+    }
+
+    public function email($id)
+    {
+        $user = User::find($id);
+        $user->alamat = Address::where('user_id', $id)->first();
+        $user->souvenir = Souvenir::where('user_id', $id)->first();
+        Mail::send(new sendMail($user));
     }
 }
