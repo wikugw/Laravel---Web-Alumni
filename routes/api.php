@@ -18,5 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/cerita', 'APIController@cerita');
 Route::get('/cerita/{id}', 'APIController@BacaCerita');
 Route::post('/cerita/{id}', 'APIController@SubmitComment');
+Route::get('/cerita/{id}/happy-reaction', 'APIController@HappyReaction');
+Route::get('/cerita/{id}/sad-reaction', 'APIController@SadReaction');
 Route::get('/alumni', 'APIController@alumni');
 Route::get('/alumni/{id}', 'APIController@DetailAlumni');

@@ -54,4 +54,20 @@ class APIController extends Controller
         $this->data['cerita'] = Cerita::with('comments')->findOrFail($id);
         return response()->json($this->data);
     }
+
+    public function HappyReaction($id)
+    {
+        $cerita = Cerita::findOrFail($id);
+        $cerita->happy_reaction_count += 1;
+        $cerita->save();
+        return response()->json($cerita);
+    }
+
+    public function SadReaction($id)
+    {
+        $cerita = Cerita::findOrFail($id);
+        $cerita->sad_reaction_count += 1;
+        $cerita->save();
+        return response()->json($cerita);
+    }
 }
