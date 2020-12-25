@@ -22,7 +22,11 @@ class APIController extends Controller
 
     public function bacaCerita($id)
     {
-        $this->data['cerita'] = Cerita::with('user.user_detail', 'comments')->findOrFail($id);
+        $cerita = Cerita::with('user.user_detail', 'comments')->findOrFail($id);
+        $cerita->visited_count += 1;
+        $cerita->popularity_count += 1;
+        $cerita->save();
+        $this->data['cerita'] = $cerita;
         $this->data['cerita']->foto = url('storage/' . $this->data['cerita']->foto);
         $this->data['cerita']->user->user_detail->foto = url('storage/' . $this->data['cerita']->user->user_detail->foto);
         return response()->json($this->data);
@@ -30,7 +34,7 @@ class APIController extends Controller
 
     public function alumni()
     {
-        $this->data['alumnis'] = User::with('cerita', 'user_detail')->where('isAdmin', 0)->orderBy('id', 'desc')->get();
+        $this->data['alumnis'] = User::with('cerita')->whereHas('user_detail')->where('isAdmin', 0)->orderBy('id', 'desc')->get();
         foreach ($this->data['alumnis'] as $alumni) {
             $alumni->user_detail->foto = url('storage/' . $alumni->user_detail->foto);
         }
