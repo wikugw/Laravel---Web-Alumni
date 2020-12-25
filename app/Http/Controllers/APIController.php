@@ -13,7 +13,7 @@ class APIController extends Controller
 {
     public function cerita()
     {
-        $this->data['ceritas'] = Cerita::with('user')->orderBy('id', 'desc')->get();
+        $this->data['ceritas'] = Cerita::with('user')->orderBy('created_at', 'desc')->get();
         foreach ($this->data['ceritas'] as $cerita) {
             $cerita->foto = url('storage/' . $cerita->foto);
         }
@@ -39,7 +39,7 @@ class APIController extends Controller
 
     public function detailAlumni($id)
     {
-        $this->data['alumni'] = User::with('cerita.user', 'user_detail')->findOrFail($id);
+        $this->data['alumni'] = User::with('cerita.user', 'user_detail', 'address.city', 'address.province')->findOrFail($id);
         $this->data['alumni']->user_detail->foto = url('storage/' . $this->data['alumni']->user_detail->foto);
         foreach ($this->data['alumni']->cerita as $cerita) {
             $cerita->foto = url('storage/' . $cerita->foto);
@@ -51,7 +51,10 @@ class APIController extends Controller
     {
         $data = $request->all();
         Comment::create($data);
-        $this->data['cerita'] = Cerita::with('comments')->findOrFail($id);
+        $cerita = Cerita::with('comments')->findOrFail($id);
+        $cerita->popularity_count += 1;
+        $cerita->save();
+        $this->data['cerita'] = $cerita;
         return response()->json($this->data);
     }
 
@@ -59,6 +62,7 @@ class APIController extends Controller
     {
         $cerita = Cerita::findOrFail($id);
         $cerita->happy_reaction_count += 1;
+        $cerita->popularity_count += 1;
         $cerita->save();
         return response()->json($cerita);
     }
@@ -67,7 +71,17 @@ class APIController extends Controller
     {
         $cerita = Cerita::findOrFail($id);
         $cerita->sad_reaction_count += 1;
+        $cerita->popularity_count += 1;
         $cerita->save();
         return response()->json($cerita);
+    }
+
+    public function ceritaPalingPopuler()
+    {
+        $this->data['ceritas'] = Cerita::with('user')->orderBy('popularity_count', 'desc')->get();
+        foreach ($this->data['ceritas'] as $cerita) {
+            $cerita->foto = url('storage/' . $cerita->foto);
+        }
+        return response()->json($this->data);
     }
 }
