@@ -44,7 +44,7 @@ class CeritaController extends Controller
     {
         $cerita = $request->except('_token');
         $cerita['user_id'] = Auth::user()->id;
-        $cerita = Cerita::create($cerita);
+        
 
         if ($request->has('foto')) {
             $cerita['foto'] = $request->file('foto')->store(
@@ -53,6 +53,8 @@ class CeritaController extends Controller
             );
         }
 
+        $cerita = Cerita::create($cerita);
+        
         $penulisDetail = UserDetail::where('user_id', Auth::user()->id)->first();
         $penulis = User::findOrFail(Auth::user()->id);
         $link = route('cerita.detail', $cerita->id);

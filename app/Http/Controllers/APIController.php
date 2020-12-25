@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cerita;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
@@ -43,6 +44,14 @@ class APIController extends Controller
         foreach ($this->data['alumni']->cerita as $cerita) {
             $cerita->foto = url('storage/' . $cerita->foto);
         }
+        return response()->json($this->data);
+    }
+
+    public function SubmitComment(Request $request, $id)
+    {
+        $data = $request->all();
+        Comment::create($data);
+        $this->data['cerita'] = Cerita::with('comments')->findOrFail($id);
         return response()->json($this->data);
     }
 }
