@@ -23,4 +23,9 @@ class Address extends Model
     {
         return $this->belongsTo('App\Province');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

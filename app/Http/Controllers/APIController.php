@@ -21,7 +21,7 @@ class APIController extends Controller
 
     public function bacaCerita($id)
     {
-        $this->data['cerita'] = Cerita::with('user.user_detail')->findOrFail($id);
+        $this->data['cerita'] = Cerita::with('user.user_detail', 'comments')->findOrFail($id);
         $this->data['cerita']->foto = url('storage/' . $this->data['cerita']->foto);
         $this->data['cerita']->user->user_detail->foto = url('storage/' . $this->data['cerita']->user->user_detail->foto);
         return response()->json($this->data);

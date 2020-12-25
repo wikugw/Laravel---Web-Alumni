@@ -70,7 +70,7 @@ class UserDetailController extends Controller
      */
     public function show($userDetail)
     {
-        $this->data['user'] = User::find(Auth::user()->id);
+        $this->data['user'] = User::with('address.city', 'address.province')->find(Auth::user()->id);
         $this->data['userDetail'] = UserDetail::where('user_id', Auth::user()->id)->first();
         if ($this->data['userDetail']) {
             return view('admin.userDetails.index', $this->data);

@@ -95,7 +95,12 @@
                                 <span class="font-weight-bold">Alamat</span>
                             </div>
                             <div class="col-12">
-                                <span>{{ $userDetail->alamat }}</span>
+                                <span>
+                                    {{ $user->address->adrress }}, 
+                                    {{ $user->address->city->city_name }}, 
+                                    {{ $user->address->province->province }},
+                                    Kode pos {{$user->address->postal_code}}
+                                </span>
                             </div>
                         </div>
                     </div>
